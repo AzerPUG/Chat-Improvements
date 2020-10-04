@@ -12,7 +12,6 @@ function AZP.GU.VersionControl:ChattyThings()
 end
 
 function AZP.GU.OnLoad:ChattyThings(self)
-    GameUtilityAddonFrame:RegisterEvent("CHAT_MSG_CHANNEL")
     SendChatMessage = function(message, ...)
         if AZPChatPrefix ~= nil and AZPChatPrefix ~= "" then
             defaultBehaviour("(" .. AZPChatPrefix .. ") " .. message, ...)
@@ -27,11 +26,6 @@ function AZP.GU.OnLoad:ChattyThings(self)
 end
 
 function AZP.GU.OnEvent:ChattyThings(event, ...)
-    if event == "CHAT_MSG_CHANNEL" then
-        --local pName, pServer = UnitFullName("player")
-        --local playerFullName = (pName .. "-" .. pServer)
-        local msgText, msgSender, _, msgChannelName = ...
-    end
 end
 
 function addonMain:ChangeOptionsText()
@@ -51,7 +45,7 @@ function addonMain:ChangeOptionsText()
     AZPChatPrefixLabel:SetPoint("TOPLEFT", 25, -50)
     AZPChatPrefixLabel.contentText = AZPChatPrefixLabel:CreateFontString("AZPChatPrefixLabel", "ARTWORK", "GameFontNormalLarge")
     AZPChatPrefixLabel.contentText:SetPoint("TOPLEFT")
-    AZPChatPrefixLabel.contentText:SetText("Chat message Prefix")
+    AZPChatPrefixLabel.contentText:SetText("Chat message Prefix (Requires reload if changed!)")
 
     local AZPChatPrefixEditBox = CreateFrame("EditBox", "AZPAutoInviteEditBox", ChattyThingsSubPanel, "InputBoxTemplate")
     AZPChatPrefixEditBox:SetSize(150, 35)
