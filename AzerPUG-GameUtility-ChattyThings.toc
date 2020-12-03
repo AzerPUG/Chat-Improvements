@@ -4,6 +4,7 @@
 ## Dependencies: AzerPUG-GameUtility-Core 
 ## Notes: Utility for the Game!
 ## Version: SL 9.0.2 (For actual addon version, check main.lua)
-## SavedVariablesPerCharacter: AZPChatPrefix AZPChatPrefixEnabled
+## SavedVariablesPerCharacter: AZPChatPrefix AZPChatPrefixEnabled AGUCheckedData
 
+dataTables.lua
 main.lua

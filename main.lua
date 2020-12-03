@@ -1,12 +1,14 @@
 local GlobalAddonName, AGU = ...
 
-local AZPGUChattyThingsVersion = 6
+local AZPGUChattyThingsVersion = 7
 local dash = " - "
 local name = "GameUtility" .. dash .. "ChattyThings"
 local nameFull = ("AzerPUG " .. name)
 local promo = (nameFull .. dash ..  AZPGUChattyThingsVersion)
 local addonMain = LibStub("AceAddon-3.0"):NewAddon("GameUtility-ChattyThings", "AceConsole-3.0")
-local defaultBehaviour = SendChatMessage
+
+local KeyPhrases = AGU.KeyPhrases
+
 function AZP.GU.VersionControl:ChattyThings()
     return AZPGUChattyThingsVersion
 end
@@ -23,6 +25,24 @@ function AZP.GU.OnLoad:ChattyThings(self)
     addonMain:ChangeOptionsText()
 
     if AZPChatPrefix == nil then AZPChatPrefix = "" end
+
+    local function AZPFilterChat(self, event, msg, author, ...)
+        local filtered = false
+        local lmsg = string.lower(msg)
+        for phrase = 1, #KeyPhrases do
+            if lmsg:find(string.lower(KeyPhrases[phrase])) then
+                filtered = true
+            end
+        end
+        if filtered == true then
+            return true
+        else
+            return false, msg, author, ...
+        end
+    end
+
+    ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", AZPFilterChat)
+    ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", AZPFilterChat)
 end
 
 function AZP.GU.OnEvent:ChattyThings(event, ...)
