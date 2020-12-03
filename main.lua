@@ -1,12 +1,13 @@
 local GlobalAddonName, AGU = ...
 
-local AZPGUChattyThingsVersion = 7
+local AZPGUChattyThingsVersion = 8
 local dash = " - "
 local name = "GameUtility" .. dash .. "ChattyThings"
 local nameFull = ("AzerPUG " .. name)
 local promo = (nameFull .. dash ..  AZPGUChattyThingsVersion)
 local addonMain = LibStub("AceAddon-3.0"):NewAddon("GameUtility-ChattyThings", "AceConsole-3.0")
 
+local defaultBehaviour = SendChatMessage
 local KeyPhrases = AGU.KeyPhrases
 
 function AZP.GU.VersionControl:ChattyThings()
