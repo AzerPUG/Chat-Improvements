@@ -1,6 +1,6 @@
 local GlobalAddonName, AGU = ...
 
-local AZPGUChattyThingsVersion = 14
+local AZPGUChattyThingsVersion = 15
 local dash = " - "
 local name = "GameUtility" .. dash .. "ChattyThings"
 local nameFull = ("AzerPUG " .. name)
