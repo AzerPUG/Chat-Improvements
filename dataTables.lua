@@ -1,7 +1,7 @@
-local GlobalAddonName, AGU = ...
-_G[GlobalAddonName] = AGU
+if AZP == nil then AZP = {} end
+if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
-AGU.KeyPhrases =
+AZP.ChatImprovements.KeyPhrases =
 {
         "Boost", "Boosting",
         "Selling Mythic", "Selling Heroic", "Selling Torghast", "Selling Castle", "Selling Keystone", "Selling M+", "Selling Sire", "Selling Denathrius", "Selling Nathria", "Selling Arena",
