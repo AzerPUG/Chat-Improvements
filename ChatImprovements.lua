@@ -8,19 +8,17 @@ AZP.VersionControl.ChatImprovements = 23
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
 local dash = " - "
-local name = "GameUtility" .. dash .. "ChattyThings"
+local name = "ChatImprovements"
 local nameFull = ("AzerPUG " .. name)
 local promo = (nameFull .. dash ..  AZPGUChattyThingsVersion)
-local addonMain = LibStub("AceAddon-3.0"):NewAddon("GameUtility-ChattyThings", "AceConsole-3.0")
 
 local defaultBehaviour = SendChatMessage
-local KeyPhrases = AGU.KeyPhrases
 
-function AZP.GU.VersionControl:ChattyThings()
+function AZP.VersionControl:ChatImprovements()
     return AZPGUChattyThingsVersion
 end
 
-function AZP.GU.OnLoad:ChattyThings(self)
+function AZP.ChatImprovements:ChatImprovements(self)
     SendChatMessage = function(message, ...)
         if AZPChatPrefix ~= nil and AZPChatPrefix ~= "" then
             defaultBehaviour("(" .. AZPChatPrefix .. ") " .. message, ...)
@@ -36,8 +34,8 @@ function AZP.GU.OnLoad:ChattyThings(self)
     local function AZPFilterChat(self, event, msg, author, ...)
         local filtered = false
         local lmsg = string.lower(msg)
-        for phrase = 1, #KeyPhrases do
-            if lmsg:find(string.lower(KeyPhrases[phrase])) then
+        for phrase = 1, #AZP.ChatImprovements.KeyPhrases do
+            if lmsg:find(string.lower(AZP.ChatImprovements.KeyPhrases[phrase])) then
                 filtered = true
             end
         end
@@ -52,10 +50,10 @@ function AZP.GU.OnLoad:ChattyThings(self)
     ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", AZPFilterChat)
 end
 
-function AZP.GU.OnEvent:ChattyThings(event, ...)
+function AZP.OnEvent:ChatImprovements(event, ...)
 end
 
-function addonMain:ChangeOptionsText()
+function AZP.ChatImprovements:ChangeOptionsText()
     ChattyThingsSubPanelPHTitle:Hide()
     ChattyThingsSubPanelPHText:Hide()
     ChattyThingsSubPanelPHTitle:SetParent(nil)
