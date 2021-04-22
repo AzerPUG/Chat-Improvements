@@ -11,10 +11,6 @@ local defaultBehaviour = SendChatMessage
 local AZPCISelfOptionPanel = nil
 local optionHeader = "|cFF00FFFFChat Improvements|r"
 
-function AZP.VersionControl:ChatImprovements()
-    return AZP.VersionControl.ChatImprovements
-end
-
 function AZP.ChatImprovements:OnLoadBoth()
     SendChatMessage = function(message, ...)
         if AZPChatPrefix ~= nil and AZPChatPrefix ~= "" then
@@ -23,8 +19,6 @@ function AZP.ChatImprovements:OnLoadBoth()
             defaultBehaviour(message, ...)
         end
     end
-    ChattyThingsSubPanel:Hide()
-    addonMain:ChangeOptionsText()
 
     if AZPChatPrefix == nil then AZPChatPrefix = "" end
 
@@ -99,21 +93,6 @@ end
 
 function AZP.OnEvent:ChatImprovements(event, ...)
 end
-
--- function AZP.ChatImprovements:ChangeOptionsText()
---     ChattyThingsSubPanelPHTitle:Hide()
---     ChattyThingsSubPanelPHText:Hide()
---     ChattyThingsSubPanelPHTitle:SetParent(nil)
---     ChattyThingsSubPanelPHText:SetParent(nil)
-
---     local ChattyThingsSubPanelHeader = ChattyThingsSubPanel:CreateFontString("ChattyThingsSubPanelHeader", "ARTWORK", "GameFontNormalHuge")
---     ChattyThingsSubPanelHeader:SetText(promo)
---     ChattyThingsSubPanelHeader:SetWidth(ChattyThingsSubPanel:GetWidth())
---     ChattyThingsSubPanelHeader:SetHeight(ChattyThingsSubPanel:GetHeight())
---     ChattyThingsSubPanelHeader:SetPoint("TOP", 0, -10)
-
-    
--- end
 
 if not IsAddOnLoaded("AzerPUG's Core") then
     AZP.ChatImprovements:OnLoadSelf()
