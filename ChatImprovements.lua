@@ -7,7 +7,9 @@ if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 local defaultBehaviour = SendChatMessage
 local AZPCISelfOptionPanel = nil
 local optionHeader = "|cFF00FFFFChat Improvements|r"
-local EventFrame, UpdateFrame
+local EventFrame, UpdateFrame = nil, nil
+
+local HaveShowedUpdateNotification = false
 
 function AZP.ChatImprovements:OnLoadBoth()
     SendChatMessage = function(message, ...)
@@ -51,6 +53,7 @@ end
 function AZP.ChatImprovements:OnLoadSelf()
     EventFrame = CreateFrame("FRAME", nil)
     EventFrame:RegisterEvent("VARIABLES_LOADED")
+    EventFrame:RegisterEvent("GROUP_ROSTER_UPDATE")
     EventFrame:SetScript("OnEvent", function(...) AZP.ChatImprovements:OnEvent(...) end)
 
     UpdateFrame = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
@@ -92,6 +95,10 @@ function AZP.ChatImprovements:OnLoadSelf()
     AZP.ChatImprovements:OnLoadBoth()
 end
 
+function AZP.ChatImprovements:eventVariablesLoaded(...)
+    
+end
+
 function AZP.ChatImprovements:eventVariablesLoaded()
     if AZPChatPrefix == nil then
         AZPChatPrefix = ""
@@ -122,9 +129,41 @@ function AZP.ChatImprovements:FillOptionsPanel(frameToFill)
     frameToFill:Hide() -- Hide, so OnShow gets called when the user opens interface options.
 end
 
+function AZP.ChatImprovements:ShareVersion()
+    local versionString = string.format("|CI:%d|", AZP.VersionControl["Chat Improvements"])
+    if IsInGroup() then
+        if IsInRaid() then
+            C_ChatInfo.SendAddonMessage("AZPVERSIONS", versionString ,"RAID", 1)
+        else
+            C_ChatInfo.SendAddonMessage("AZPVERSIONS", versionString ,"PARTY", 1)
+        end
+    end
+    if IsInGuild() then
+        C_ChatInfo.SendAddonMessage("AZPVERSIONS", versionString ,"GUILD", 1)
+    end
+end
+
+function AZP.ChatImprovements:ReceiveVersion(version)
+    if version > AZP.VersionControl["Chat Improvements"] then
+        if (not HaveShowedUpdateNotification) then
+            HaveShowedUpdateNotification = true
+            UpdateFrame:Show()
+            UpdateFrame.text:SetText(
+                "Please download the new version through the CurseForge app.\n" ..
+                "Or use the CurseForge website to download it manually!\n\n" .. 
+                "Newer Version: v" .. version .. "\n" .. 
+                "Your version: v" .. AZP.VersionControl["Chat Improvements"]
+            )
+        end
+    end
+end
+
 function AZP.ChatImprovements:OnEvent(_, event, ...)
     if event == "VARIABLES_LOADED" then
-        
+        AZP.ChatImprovements:eventVariablesLoaded(...)
+        AZP.ChatImprovements:ShareVersion()
+    elseif event == "GROUP_ROSTER_UPDATE" then
+        AZP.ChatImprovements:ShareVersion()
     end
 end
 
