@@ -95,10 +95,6 @@ function AZP.ChatImprovements:OnLoadSelf()
     AZP.ChatImprovements:OnLoadBoth()
 end
 
-function AZP.ChatImprovements:eventVariablesLoaded(...)
-    
-end
-
 function AZP.ChatImprovements:eventVariablesLoaded()
     if AZPChatPrefix == nil then
         AZPChatPrefix = ""
