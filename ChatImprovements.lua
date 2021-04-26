@@ -51,9 +51,12 @@ function AZP.ChatImprovements:OnLoadCore()
 end
 
 function AZP.ChatImprovements:OnLoadSelf()
+    C_ChatInfo.RegisterAddonMessagePrefix("AZPVERSIONS")
+
     EventFrame = CreateFrame("FRAME", nil)
     EventFrame:RegisterEvent("VARIABLES_LOADED")
     EventFrame:RegisterEvent("GROUP_ROSTER_UPDATE")
+    EventFrame:RegisterEvent("CHAT_MSG_ADDON")
     EventFrame:SetScript("OnEvent", function(...) AZP.ChatImprovements:OnEvent(...) end)
 
     UpdateFrame = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
@@ -154,12 +157,34 @@ function AZP.ChatImprovements:ReceiveVersion(version)
     end
 end
 
+function AZP.ChatImprovements:GetSpecificAddonVersion(versionString, addonWanted)
+    local pattern = "|([A-Z]+):([0-9]+)|"
+    local index = 1
+    while index < #versionString do
+        local _, endPos = string.find(versionString, pattern, index)
+        local addon, version = string.match(versionString, pattern, index)
+        index = endPos + 1
+        if addon == addonWanted then
+            return tonumber(version)
+        end
+    end
+end
+
+
 function AZP.ChatImprovements:OnEvent(_, event, ...)
     if event == "VARIABLES_LOADED" then
         AZP.ChatImprovements:eventVariablesLoaded(...)
         AZP.ChatImprovements:ShareVersion()
     elseif event == "GROUP_ROSTER_UPDATE" then
         AZP.ChatImprovements:ShareVersion()
+    elseif event == "CHAT_MSG_ADDON" then
+        local prefix, payload, _, sender = ...
+        if prefix == "AZPVERSIONS" then
+            local version = AZP.ChatImprovements:GetSpecificAddonVersion(payload, "CI")
+            if version ~= nil then
+                AZP.ChatImprovements:ReceiveVersion(version)
+            end
+        end
     end
 end
 
