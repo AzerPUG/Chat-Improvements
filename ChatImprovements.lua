@@ -1,12 +1,13 @@
 if AZP == nil then AZP = {} end
 if AZP.VersionControl == nil then AZP.VersionControl = {} end
 
-AZP.VersionControl["ChatImprovements"] = 23
+AZP.VersionControl["Chat Improvements"] = 23
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
 local defaultBehaviour = SendChatMessage
 local AZPCISelfOptionPanel = nil
 local optionHeader = "|cFF00FFFFChat Improvements|r"
+local EventFrame, UpdateFrame
 
 function AZP.ChatImprovements:OnLoadBoth()
     SendChatMessage = function(message, ...)
@@ -40,13 +41,38 @@ end
 
 function AZP.ChatImprovements:OnLoadCore()
     AZP.ChatImprovements:OnLoadBoth()
-
+    AZP.Core:RegisterEvents("VARIABLES_LOADED", function() AZP.ChatImprovements:eventVariablesLoaded() end)
+    AZP.OptionsPanels:RemovePanel("Chat Improvements")
     AZP.OptionsPanels:Generic("Chat Improvements", optionHeader, function (frame)
         AZP.ChatImprovements:FillOptionsPanel(frame)
     end)
 end
 
 function AZP.ChatImprovements:OnLoadSelf()
+    EventFrame = CreateFrame("FRAME", nil)
+    EventFrame:RegisterEvent("VARIABLES_LOADED")
+    EventFrame:SetScript("OnEvent", function(...) AZP.ChatImprovements:OnEvent(...) end)
+
+    UpdateFrame = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
+    UpdateFrame:SetPoint("CENTER", 0, 250)
+    UpdateFrame:SetSize(400, 200)
+    UpdateFrame:SetBackdrop({
+        bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+        edgeSize = 12,
+        insets = { left = 1, right = 1, top = 1, bottom = 1 },
+    })
+    UpdateFrame:SetBackdropColor(0.25, 0.25, 0.25, 0.80)
+    UpdateFrame.header = UpdateFrame:CreateFontString("UpdateFrame", "ARTWORK", "GameFontNormalHuge")
+    UpdateFrame.header:SetPoint("TOP", 0, -10)
+    UpdateFrame.header:SetText("|cFFFF0000AzerPUG's ToolTips is out of date!|r")
+
+    UpdateFrame.text = UpdateFrame:CreateFontString("UpdateFrame", "ARTWORK", "GameFontNormalLarge")
+    UpdateFrame.text:SetPoint("TOP", 0, -40)
+    UpdateFrame.text:SetText("Error!")
+
+    UpdateFrame:Hide()
+
     AZPCISelfOptionPanel = CreateFrame("FRAME", nil)
     AZPCISelfOptionPanel.name = optionHeader
     InterfaceOptions_AddCategory(AZPCISelfOptionPanel)
@@ -64,6 +90,12 @@ function AZP.ChatImprovements:OnLoadSelf()
     )
     AZP.ChatImprovements:FillOptionsPanel(AZPCISelfOptionPanel)
     AZP.ChatImprovements:OnLoadBoth()
+end
+
+function AZP.ChatImprovements:eventVariablesLoaded()
+    if AZPChatPrefix == nil then
+        AZPChatPrefix = ""
+    end
 end
 
 function AZP.ChatImprovements:FillOptionsPanel(frameToFill)
@@ -86,9 +118,14 @@ function AZP.ChatImprovements:FillOptionsPanel(frameToFill)
     AZPChatPrefixEditBox:SetFrameStrata("DIALOG")
     AZPChatPrefixEditBox:SetMaxLetters(100)
     AZPChatPrefixEditBox:SetFontObject("ChatFontNormal")
+
+    frameToFill:Hide() -- Hide, so OnShow gets called when the user opens interface options.
 end
 
-function AZP.OnEvent:ChatImprovements(event, ...)
+function AZP.ChatImprovements:OnEvent(_, event, ...)
+    if event == "VARIABLES_LOADED" then
+        
+    end
 end
 
 if not IsAddOnLoaded("AzerPUGsCore") then
