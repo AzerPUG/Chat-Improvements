@@ -17,7 +17,7 @@ AzerPUG's Chat Improvements let's you define a nickname that will automatically 
 The addon also automatically blocks A LOT of spam from any chats you are in. Automatically blocking messages containing multiple phrases containing clear indication that some one is spamming chat for boosting communities. These messages will simply be filtered and not displayed.
 
 # Bugs, Errors, Glitches and Requests.
-If you find any of the above, please do not hessitate to create a GitHub Issue here: https://github.com/AzerPUG/Chat-Improvements/issues  
+If you find any of the above, please do not hesitate to create a GitHub Issue here: https://github.com/AzerPUG/Chat-Improvements/issues  
 Or you can join our Discord and let us know in the AzerTech channel: http://www.azerpug.com/discord  
 Please note that our Discord Verification level prevents new people from talking/commenting/ranking in the first 10 minutes!
 
