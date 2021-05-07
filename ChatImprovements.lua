@@ -71,7 +71,7 @@ function AZP.ChatImprovements:OnLoadSelf()
     UpdateFrame:SetBackdropColor(0.25, 0.25, 0.25, 0.80)
     UpdateFrame.header = UpdateFrame:CreateFontString("UpdateFrame", "ARTWORK", "GameFontNormalHuge")
     UpdateFrame.header:SetPoint("TOP", 0, -10)
-    UpdateFrame.header:SetText("|cFFFF0000AzerPUG's ToolTips is out of date!|r")
+    UpdateFrame.header:SetText("|cFFFF0000AzerPUG's Chat Improvements is out of date!|r")
 
     UpdateFrame.text = UpdateFrame:CreateFontString("UpdateFrame", "ARTWORK", "GameFontNormalLarge")
     UpdateFrame.text:SetPoint("TOP", 0, -40)
