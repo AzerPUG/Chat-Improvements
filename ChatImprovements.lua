@@ -1,12 +1,11 @@
 if AZP == nil then AZP = {} end
 if AZP.VersionControl == nil then AZP.VersionControl = {} end
 
-AZP.VersionControl["Chat Improvements"] = 24
+AZP.VersionControl["Chat Improvements"] = 25
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
 local defaultBehaviour = SendChatMessage
 local AZPCISelfOptionPanel = nil
-local optionHeader = "|cFF00FFFFChat Improvements|r"
 local EventFrame, UpdateFrame = nil, nil
 
 local HaveShowedUpdateNotification = false
@@ -45,7 +44,7 @@ function AZP.ChatImprovements:OnLoadCore()
     AZP.ChatImprovements:OnLoadBoth()
     AZP.Core:RegisterEvents("VARIABLES_LOADED", function() AZP.ChatImprovements:eventVariablesLoaded() end)
     AZP.OptionsPanels:RemovePanel("Chat Improvements")
-    AZP.OptionsPanels:Generic("Chat Improvements", optionHeader, function (frame)
+    AZP.OptionsPanels:Generic("Chat Improvements", function (frame)
         AZP.ChatImprovements:FillOptionsPanel(frame)
     end)
 end
@@ -80,7 +79,7 @@ function AZP.ChatImprovements:OnLoadSelf()
     UpdateFrame:Hide()
 
     AZPCISelfOptionPanel = CreateFrame("FRAME", nil)
-    AZPCISelfOptionPanel.name = optionHeader
+    AZPCISelfOptionPanel.name = "|cFF00FFFFChat Improvements|r"
     InterfaceOptions_AddCategory(AZPCISelfOptionPanel)
     AZPCISelfOptionPanel.header = AZPCISelfOptionPanel:CreateFontString(nil, "ARTWORK", "GameFontNormalHuge")
     AZPCISelfOptionPanel.header:SetPoint("TOP", 0, -10)
