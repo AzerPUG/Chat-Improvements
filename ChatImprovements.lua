@@ -1,7 +1,7 @@
 if AZP == nil then AZP = {} end
 if AZP.VersionControl == nil then AZP.VersionControl = {} end
 
-AZP.VersionControl["Chat Improvements"] = 25
+AZP.VersionControl["Chat Improvements"] = 26
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
 local defaultBehaviour = SendChatMessage
@@ -22,12 +22,16 @@ function AZP.ChatImprovements:OnLoadBoth()
     if AZPChatPrefix == nil then AZPChatPrefix = "" end
 
     local function AZPFilterChat(self, event, msg, author, ...)
+        local BlockedKeyPhrases = {}
         local filtered = false
         local lmsg = string.lower(msg)
-        for phrase = 1, #AZP.ChatImprovements.KeyPhrases do
-            if lmsg:find(string.lower(AZP.ChatImprovements.KeyPhrases[phrase])) then
-                filtered = true
+        for pIndex = 1, #AZP.ChatImprovements.KeyPhrases do
+            if lmsg:find(string.lower(AZP.ChatImprovements.KeyPhrases[pIndex])) ~= nil then
+                BlockedKeyPhrases[#BlockedKeyPhrases + 1] = AZP.ChatImprovements.KeyPhrases[pIndex]
             end
+        end
+        if #BlockedKeyPhrases >= 2 then
+            filtered = true
         end
         if filtered == true then
             return true
@@ -168,7 +172,6 @@ function AZP.ChatImprovements:GetSpecificAddonVersion(versionString, addonWanted
         end
     end
 end
-
 
 function AZP.ChatImprovements:OnEvent(_, event, ...)
     if event == "VARIABLES_LOADED" then

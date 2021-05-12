@@ -3,8 +3,7 @@ if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
 AZP.ChatImprovements.KeyPhrases =
 {
-        "Boost", "Boosting",
-        "Selling Mythic", "Selling Heroic", "Selling Torghast", "Selling Castle", "Selling Keystone", "Selling M+", "Selling Sire", "Selling Denathrius", "Selling Nathria", "Selling Arena",
-        "WTS Mythic", "WTS Heroic", "WTS Torghast", "WTS Castle", "WTS Keystone", "WTS M+", "WTS Sire", "WTS Denathrius", "WTS Nathria", "WTS Arena",
+        "Boost", "Boosting", "Selling", "WTS",
+        "Mythic", "Heroic", "Torghast", "Keystone", "M+", "Sire", "Denathrius", "Nathria", "Arena",
         "Gallywix", "Nova", "Icecrown", "Sylvanas", "RCU", "Oblivion", "Hydra", "Krakenboost", "SBS", "OOU", "Skycoach", "Twilight", "Exsorsus", "Titan", "NBC", "Triple DR",
 }
