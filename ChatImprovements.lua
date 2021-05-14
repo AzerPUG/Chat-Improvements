@@ -1,7 +1,7 @@
 if AZP == nil then AZP = {} end
 if AZP.VersionControl == nil then AZP.VersionControl = {} end
 
-AZP.VersionControl["Chat Improvements"] = 26
+AZP.VersionControl["Chat Improvements"] = 27
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 
 local defaultBehaviour = SendChatMessage
