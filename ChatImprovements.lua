@@ -1,7 +1,7 @@
 if AZP == nil then AZP = {} end
 if AZP.VersionControl == nil then AZP.VersionControl = {} end
 
-AZP.VersionControl["Chat Improvements"] = 27
+AZP.VersionControl["Chat Improvements"] = 28
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
 if AZP.ChatImprovements.Events == nil then AZP.ChatImprovements.Events = {} end
 
