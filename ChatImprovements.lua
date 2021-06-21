@@ -3,6 +3,7 @@ if AZP.VersionControl == nil then AZP.VersionControl = {} end
 
 AZP.VersionControl["Chat Improvements"] = 27
 if AZP.ChatImprovements == nil then AZP.ChatImprovements = {} end
+if AZP.ChatImprovements.Events == nil then AZP.ChatImprovements.Events = {} end
 
 local defaultBehaviour = SendChatMessage
 local AZPCISelfOptionPanel = nil
@@ -47,7 +48,7 @@ end
 
 function AZP.ChatImprovements:OnLoadCore()
     AZP.ChatImprovements:OnLoadBoth()
-    AZP.Core:RegisterEvents("VARIABLES_LOADED", function() AZP.ChatImprovements:eventVariablesLoaded() end)
+    AZP.Core:RegisterEvents("VARIABLES_LOADED", function() AZP.ChatImprovements.Events:VariablesLoaded() end)
     AZP.OptionsPanels:RemovePanel("Chat Improvements")
     AZP.OptionsPanels:Generic("Chat Improvements", optionHeader, function(frame)
         AZP.ChatImprovements:FillOptionsPanel(frame)
@@ -102,7 +103,7 @@ function AZP.ChatImprovements:OnLoadSelf()
     AZP.ChatImprovements:OnLoadBoth()
 end
 
-function AZP.ChatImprovements:eventVariablesLoaded()
+function AZP.ChatImprovements.Events:VariablesLoaded()
     if AZPChatPrefix == nil then
         AZPChatPrefix = ""
     end
@@ -180,7 +181,7 @@ end
 
 function AZP.ChatImprovements:OnEvent(_, event, ...)
     if event == "VARIABLES_LOADED" then
-        AZP.ChatImprovements:eventVariablesLoaded(...)
+        AZP.ChatImprovements.Events:VariablesLoaded(...)
         AZP.ChatImprovements:ShareVersion()
     elseif event == "GROUP_ROSTER_UPDATE" then
         AZP.ChatImprovements:ShareVersion()
