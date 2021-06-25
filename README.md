@@ -17,7 +17,18 @@
 
 # Description and Features
 AzerPUG's Chat Improvements let's you define a nickname that will automatically be in front of the messages you type. If you are on an alt or just want to add your standard name to a message, this will help you make that a lot easier.  
-The addon also automatically blocks A LOT of spam from any chats you are in. Automatically blocking messages containing multiple phrases containing clear indication that some one is spamming chat for boosting communities. These messages will simply be filtered and not displayed.
+The addon also automatically blocks A LOT of spam from any chats you are in. Automatically blocking messages containing multiple phrases containing clear indication that some one is spamming chat for boosting communities. These messages will simply be filtered and not displayed. 
+
+# Optional Core
+All AzerPUG AddOns are stand-alone and as lightweight as possible.  
+However, some very resource intensive things with AddOns are really nice to have.  
+In order to provide these extra things, like optimization or combining the AddOns into one bigger one, we have an optinal, combined AddOn.  
+Anyone who uses several of our AddOns, is strongly suggested to use the [AzerPUG's Core](https://www.curseforge.com/wow/addons/azerpugs-core) as well.  
+This Core AddOn will do several things that are considered an imporvement by most people:
+- Speed up loading times
+- Register events more efficiently.
+- Deal with all the event handling for all AzerPUG AddOns.
+- Deal with all the version control for all AzerPUG AddOns.  
 
 # Bugs, Errors, Glitches and Requests.
 If you find any of the above, please do not hesitate to create a GitHub Issue here: https://github.com/AzerPUG/Chat-Improvements/issues  
